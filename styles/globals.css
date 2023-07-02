@@ -45,6 +45,10 @@ a {
   border-bottom: 0;
   border-top-right-radius: 3em;
 }
+.race-card:hover {
+  cursor: pointer;
+}
+
 .race-card_date {
   color: #464646;
   font-weight: 900;
@@ -57,6 +61,9 @@ a {
   color: #ffffff;
   margin: 0;
   border-top-right-radius: .5em;
+}
+.logo{
+  background: #000;
 }
 
 .lds-hourglass {
