@@ -1,6 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 import cheerio from "cheerio";
+import { syncWriteFile,asyncWriteFile } from "../../helpers/fileReadWrite";
+
 const https = require('https');
 const fs = require('fs');
 
@@ -75,7 +77,8 @@ export default async function getSchedule(
         tableData.push(rowData);
       }
     });
-   
+    
+    asyncWriteFile("test",'test text')
     res.status(200).json({ scheduleData: tableData });
   } catch (error) {
     console.error(error);

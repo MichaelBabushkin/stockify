@@ -27,6 +27,23 @@ const Schedule: React.FC = () => {
     fetchStocksData();
   }, []);
 
+
+  useEffect(() => {
+    if(stocksData.length > 0){
+      console.log("stockdata is full");
+      
+    }
+    // const fetchStocksData = async () => {
+    //   const { data } = await axios.get<ScheduleResponse>(
+    //     `${window.location.href}/api/sp500stocks`
+    //   );
+    //   console.log(data)
+    //   setStocksData(data.scheduleData); 
+    // };
+    // fetchStocksData();
+  }, [stocksData]);
+
+
   return (
     <main>
       <h1 className="title">S&P500 Stocks</h1>
