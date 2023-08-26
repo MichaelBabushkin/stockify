@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import CoinLoader from "./CoinLoader";
+import Image from "next/image";
 
 interface StockItem {
   company_name: string;
@@ -102,10 +103,11 @@ const StockDash: React.FC = () => {
               <h1 className="race-card_venue">{stock.ticker}</h1>
               <h2 className="race-card_venue">{stock.sector}</h2>
               {/* <img className="logo" src={aapl}></img> */}
-              <img
+              <Image
                 className="logo"
+                alt="logo"
                 src={`static/images/stockLogos/${stock.ticker.toLocaleLowerCase()}.svg`}
-              ></img>
+              />
             </div>
           ))
         ) : (
