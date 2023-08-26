@@ -1,48 +1,66 @@
-import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 import cheerio from "cheerio";
-import { syncWriteFile,asyncWriteFile } from "../../helpers/fileReadWrite";
+import { db } from '@vercel/postgres';
+import imageDownloader from '../../helpers/imageDownloader';
 
-const https = require('https');
 const fs = require('fs');
 
 const getUrl = `https://topforeignstocks.com/indices/components-of-the-sp-500-index`;
 
 
-const saveImage = (name: string) => {
+async function  saveStockName (stockArr) {
+  const client = await db.connect();
+
+stockArr.forEach(stock => {
+  let name = stock.ticker.toLowerCase();
   const imageUrl = `https://hellostake.com/api/us/instrument/logo/${name}.svg`;
   const imageName = `public/static/images/stockLogos/${name}.svg`;
-  
   try {
-    if (fs.existsSync(imageName)) {
-      console.log("file exists");
-      return
+    let logoSVG
+    if (fs.existsSync(imageName) ) {
+       logoSVG = fs.readFileSync(imageName,'utf8')
     }
+    else{
+       logoSVG = fs.readFileSync(imageDownloader(imageName),'utf8')
+      }
+      const { rows } = client.sql`INSERT INTO logos (BRAND_NAME,BRAND_SVG)
+      SELECT ${name}, ${logoSVG} WHERE NOT EXISTS(
+        SELECT BRAND_NAME from logos 
+        WHERE BRAND_NAME = ${name}
+      );`;
+      
+  //      axios.post(`http://localhost:3000/api/db/logo/addLogo`, {
+  //       brand_name: name,
+  //       brand_svg:logoSVG,
+  //       headers: {
+  //           'Content-type': 'application/json',
+  //       },
+  
+  // }).then(response =>{
+  //     console.log(name)
+  //   return
+  //   })
+  
+  
+    
+  
   } catch(err) {
     console.error(err)
   }
+ 
 
 
-  const file = fs.createWriteStream(imageName);
-  
-  https.get(imageUrl, response => {
-    response.pipe(file);
-  
-    file.on('finish', () => {
-      file.close();
-      console.log(`Image downloaded as ${imageName}`);
-    });
-  }).on('error', err => {
-    fs.unlink(imageName);
-    console.error(`Error downloading image: ${err.message}`);
-  });
+});
+
+ 
 }
 
-export default async function getSchedule(
-  req: NextApiRequest,
-  res: NextApiResponse
+export default async function handler(
+  req,
+  res
 ) {
   try {
+
     const { data } = await axios.get(getUrl);
 
     // Use Cheerio to parse the HTML
@@ -66,7 +84,6 @@ export default async function getSchedule(
             if (j === 1) rowData["company_name"] = $(cell).text();
             if (j === 2){
               rowData["ticker"] = $(cell).text();
-              saveImage($(cell).text().toLocaleLowerCase())
             } 
             if (j === 3) rowData["sector"] = $(cell).text();
             
@@ -75,10 +92,12 @@ export default async function getSchedule(
 
         // Add the row data to the table data array
         tableData.push(rowData);
+        
       }
     });
+
+    saveStockName(tableData)
     
-    asyncWriteFile("test",'test text')
     res.status(200).json({ scheduleData: tableData });
   } catch (error) {
     console.error(error);

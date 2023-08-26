@@ -1,20 +1,20 @@
 import Head from "next/head";
 import React from "react";
-import Schedule from "../components/Schedule";
+import StockDash from "../components/StockDash";
 
 export default function Home() {
   return (
     <div>
       <Head>
-        <title>F1 Schedule 2023</title>
+        <title>Stockify</title>
         <meta
           name="description"
-          content="F1 Schedule 2023 fetched from f1 official website"
+          content="the best site to get all the informations about stock market"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Schedule />
+      <StockDash />
     </div>
   );
 }

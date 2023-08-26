@@ -19,13 +19,32 @@
     "jsx": "preserve",
     "types": [
       "node"
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "~components/*": ["src/components/*"],
+      "~components": ["src/components"],
+      "~fonts/*": ["public/fonts/*"],
+      "~fonts": ["public/fonts"],
+      "@images/*": ["public/static/images/*"],
+      "@images": ["public/static/images"],
+      "~sections": ["src/sections"],
+      "~sections/*": ["src/sections/*"],
+      "~styled/*": ["src/styles/*"],
+      "~styled": ["src/styles"],
+      "~scss/*": ["src/styles/scss/*"],
+      "~scss": ["src/styles/scss"],
+      "~data/*": ["src/data/*"],
+      "~data": ["src/data"],
+      "@/*": ["node_modules/*"],
+      "@": ["node_modules"],
+  }
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "helpers/fileReadWrite.js"  ],
+, "helpers/fileReadWrite.js", "pages/api/db/logo/getLogos.js", "pages/api/sp500stocks.js"  ],
   "exclude": [
     "node_modules"
   ]
