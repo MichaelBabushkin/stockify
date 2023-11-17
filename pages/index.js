@@ -1,5 +1,6 @@
 import Head from "next/head";
 import React from "react";
+import Link from "next/link";
 import StockDash from "../components/StockDash";
 
 export default function Home() {
@@ -13,9 +14,12 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <StockDash />
+      <main>
+        <h1>HomePage</h1>
+        <Link href="/register">Register Page</Link>
+        <Link href="/login">Login Page</Link>
+      </main>
+      {/* <StockDash /> */}
     </div>
   );
 }
-

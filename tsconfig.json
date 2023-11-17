@@ -22,8 +22,8 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "~components/*": ["src/components/*"],
-      "~components": ["src/components"],
+      "@/components/*": ["components/*"],
+      "@/lib/*": ["lib/*"],
       "~fonts/*": ["public/fonts/*"],
       "~fonts": ["public/fonts"],
       "@images/*": ["public/static/images/*"],
@@ -44,7 +44,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "helpers/fileReadWrite.js", "pages/api/db/logo/getLogos.js", "pages/api/sp500stocks.js"  ],
+, "helpers/fileReadWrite.js", "pages/api/db/logo/getLogos.js", "pages/api/sp500stocks.js", "pages/index.js", "pages/api/auth/[...nextauth].ts", "pages/register/index.jsx", "pages/api/register/index.ts", "pages/login/index.tsx"  ],
   "exclude": [
     "node_modules"
   ]
