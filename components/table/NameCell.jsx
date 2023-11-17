@@ -1,4 +1,6 @@
- const NameCell = ({ rowData, dataKey, ...props }) => {
+import { Popover, Whisper } from "rsuite";
+
+const NameCell = ({ rowData, dataKey, ...props }) => {
   const speaker = (
     <Popover title="Description">
       <p>

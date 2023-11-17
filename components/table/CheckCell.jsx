@@ -1,3 +1,5 @@
+import { Checkbox } from "rsuite";
+
 const CheckCell = ({ rowData, onChange, checkedKeys, dataKey, ...props }) => (
   <Cell {...props} style={{ padding: 0 }}>
     <div style={{ lineHeight: "46px" }}>
