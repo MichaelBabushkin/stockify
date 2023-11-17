@@ -1,4 +1,5 @@
-import { Checkbox } from "rsuite";
+import {Table, Checkbox } from "rsuite";
+const { Cell } = Table;
 
 const CheckCell = ({ rowData, onChange, checkedKeys, dataKey, ...props }) => (
   <Cell {...props} style={{ padding: 0 }}>

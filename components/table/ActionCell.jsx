@@ -1,4 +1,6 @@
-import { Popover, Whisper, Dropdown, IconButton } from "rsuite";
+import { Table, Popover, Whisper, Dropdown, IconButton } from "rsuite";
+import MoreIcon from "@rsuite/icons/legacy/More";
+const { Cell } = Table;
 
 const renderMenu = ({ onClose, left, top, className }, ref) => {
   const handleSelect = (eventKey) => {

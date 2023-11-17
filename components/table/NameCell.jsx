@@ -1,4 +1,5 @@
-import { Popover, Whisper } from "rsuite";
+import { Table, Popover, Whisper } from "rsuite";
+const { Cell } = Table;
 
 const NameCell = ({ rowData, dataKey, ...props }) => {
   const speaker = (

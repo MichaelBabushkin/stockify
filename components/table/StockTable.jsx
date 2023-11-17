@@ -8,7 +8,6 @@ import {
   IconButton,
   Progress,
 } from "rsuite";
-import MoreIcon from "@rsuite/icons/legacy/More";
 import NameCell from "./NameCell";
 import CheckCell from "./CheckCell";
 import ImageCell from "./ImageCell";

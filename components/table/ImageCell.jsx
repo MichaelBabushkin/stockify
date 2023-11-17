@@ -1,3 +1,6 @@
+import { Table } from "rsuite";
+const { Cell } = Table;
+
 const ImageCell = ({ rowData, dataKey, ...props }) => (
   <Cell {...props} style={{ padding: 0 }}>
     <div
