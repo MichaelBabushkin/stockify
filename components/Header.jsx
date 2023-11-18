@@ -17,6 +17,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import stockifyLogo from "@images/Stockify.png";
+import { useSession, signOut } from "next-auth/react";
 
 const products = [
   {
@@ -61,6 +62,9 @@ function classNames(...classes) {
 
 export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { data: session, status } = useSession();
+  console.log(status);
+  console.log(session);
 
   return (
     <header className="bg-white">
@@ -69,11 +73,11 @@ export default function Example() {
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
-            <Image
-              src={stockifyLogo}
-              className="mx-auto h-10 w-auto"
-              alt="Page not found"
-            />
+          <Image
+            src={stockifyLogo}
+            className="mx-auto h-10 w-auto"
+            alt="Page not found"
+          />
         </div>
         <div className="flex lg:hidden">
           <button
@@ -160,12 +164,26 @@ export default function Example() {
           </a>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link
-            href="/login"
-            className="text-sm font-semibold leading-6 text-gray-900"
-          >
-            Log in <span aria-hidden="true">&rarr;</span>
-          </Link>
+          {status === "authenticated" ? (
+            <>
+              <div className="text-sm font-semibold leading-6 text-gray-900 px-6">
+                {session?.user?.name}
+              </div>
+              <button
+                className="text-sm font-semibold leading-6 text-gray-900"
+                onClick={() => signOut()}
+              >
+                Sign out <span aria-hidden="true">&rarr;</span>
+              </button>
+            </>
+          ) : (
+            <Link
+              href="/login"
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
+              Log in <span aria-hidden="true">&rarr;</span>
+            </Link>
+          )}
         </div>
       </nav>
       <Dialog
@@ -177,14 +195,11 @@ export default function Example() {
         <div className="fixed inset-0 z-10" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt=""
-              />
-            </a>
+            <Image
+              src={stockifyLogo}
+              className="mx-auto h-10 w-auto"
+              alt="Page not found"
+            />
             <button
               type="button"
               className="-m-2.5 rounded-md p-2.5 text-gray-700"
