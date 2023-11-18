@@ -1,6 +1,5 @@
 import { prisma } from "@/lib/prisma";
 import { hash } from "bcryptjs";
-// import { NextResponse } from "next/server";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type ResponseData = {
